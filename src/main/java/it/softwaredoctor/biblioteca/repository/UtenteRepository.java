@@ -10,6 +10,7 @@ import java.util.UUID;
 public interface UtenteRepository extends JpaRepository<Utente, Long> {
 
     Optional<Utente> findByUuid(UUID uuidUtente);
+
     Optional<Utente> findByCodUtente(String codUtente);
 
     Optional<Utente> findByCodUtenteAndBibliotecaId(String codUtente, Long bibliotecaId);

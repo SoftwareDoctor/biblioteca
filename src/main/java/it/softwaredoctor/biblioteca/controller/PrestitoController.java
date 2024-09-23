@@ -1,15 +1,10 @@
 package it.softwaredoctor.biblioteca.controller;
 
-import it.softwaredoctor.biblioteca.model.Biblioteca;
 import it.softwaredoctor.biblioteca.service.PrestitoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
-import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.ErrorResponse;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.UUID;
 
@@ -19,12 +14,6 @@ import java.util.UUID;
 public class PrestitoController {
 
     private final PrestitoService prestitoService;
-
-//    @PostMapping("/newPrestito")
-//    public ResponseEntity<Void> createPrestito(@RequestParam UUID uuidBiblioteca, @RequestParam String codiceUtente, @RequestParam String codiceLibro) {
-//        prestitoService.createPrestito(uuidBiblioteca,codiceUtente, codiceLibro);
-//        return ResponseEntity.status(HttpStatus.CREATED).build();
-//    }
 
     @PostMapping("/newPrestito")
     public ResponseEntity<List<String>> createPrestito(@RequestParam UUID uuidBiblioteca, @RequestParam String codiceUtente, @RequestParam String codiceLibro) {
@@ -41,5 +30,4 @@ public class PrestitoController {
         prestitoService.restituireLibro(codiceUtente, codiceLibro);
         return ResponseEntity.noContent().build();
     }
-
 }

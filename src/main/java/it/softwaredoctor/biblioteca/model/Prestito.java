@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.UUID;
-
 import static java.time.LocalDate.now;
 
 @AllArgsConstructor
@@ -53,7 +52,6 @@ public class Prestito {
     @JoinColumn(name = "biblioteca_id")
     private Biblioteca biblioteca;
 
-
     @PrePersist
     private void prepareForSave() {
         if (this.uuid == null) {
@@ -61,7 +59,4 @@ public class Prestito {
         }
         this.prestitoEndDate = this.prestitoStartDate.plus(15, ChronoUnit.DAYS);
     }
-
-
-
 }

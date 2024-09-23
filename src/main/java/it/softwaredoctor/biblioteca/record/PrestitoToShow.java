@@ -1,7 +1,6 @@
 package it.softwaredoctor.biblioteca.record;
 
 import it.softwaredoctor.biblioteca.model.Prestito;
-
 import java.time.LocalDate;
 
 public record PrestitoToShow(
@@ -20,5 +19,4 @@ public record PrestitoToShow(
                 prestito.getDataRestituzione(),
                 prestito.getDelay());
     }
-
 }

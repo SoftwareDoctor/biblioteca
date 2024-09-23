@@ -4,7 +4,6 @@ import it.softwaredoctor.biblioteca.model.Biblioteca;
 import it.softwaredoctor.biblioteca.repository.BibliotecaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.util.UUID;
 
 @RequiredArgsConstructor

@@ -60,7 +60,6 @@ public class Libro {
     private List<Prestito> prestiti;
 
 
-
     @PrePersist
     private void updateCodLibroCreateUUID() {
         if (this.uuid == null) {
