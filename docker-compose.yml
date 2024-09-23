@@ -1,0 +1,23 @@
+services:
+  db:
+    container_name: postgres-3
+    image: postgres
+    environment:
+      POSTGRES_USER: andrea
+      POSTGRES_PASSWORD: italiano
+      PGDATA: /data/postgres
+      POSTGRES_DB: biblioteca
+    volumes:
+      - db:/var/lib/postgresql/data  # Mount volume per persistenza dati
+    ports:
+      - "5436:5432"
+    networks:
+      - db-network
+    restart: unless-stopped
+
+networks:
+  db-network:
+    driver: bridge
+
+volumes:
+  db:
