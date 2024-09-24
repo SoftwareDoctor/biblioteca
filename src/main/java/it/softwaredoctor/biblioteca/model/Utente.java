@@ -49,7 +49,7 @@ public class Utente {
     private List<Prestito> prestiti;
 
     @Column(name = "tot_prestiti_utente")
-    private Integer totPrestitiUtente = 0;
+    private int totPrestitiUtente = 0;
 
 
         @PrePersist

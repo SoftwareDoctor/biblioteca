@@ -28,16 +28,6 @@ public class PrestitoService {
     private final LibroService libroService;
     private final UtenteRepository utenteRepository;
 
-    // calcolare alla consegna del libro
-    private void calculateDelay(Prestito prestito) {
-        long delay;
-        if (prestito.getPrestitoEndDate().isBefore(prestito.getDataRestituzione())) {
-            delay = java.time.temporal.ChronoUnit.DAYS.between(prestito.getPrestitoEndDate(), prestito.getDataRestituzione());
-        } else {
-            delay = 0;
-        }
-    }
-
     // trovare prestiti scaduti
     public List<Prestito> findExpiredPrestiti() {
         LocalDate currentDate = LocalDate.now();
@@ -58,7 +48,7 @@ public class PrestitoService {
             throw new IllegalArgumentException("Libro non trovato per il codice fornito.");
         }
         Libro libro = libroOptional.get();
-        Optional<Prestito> prestitoOptional = prestitoRepository.findPrestitoByUtenteAndLibro(utente, libro);
+        Optional<Prestito> prestitoOptional = prestitoRepository.findPrestitoByUtenteUuidAndLibroUuid(utente.getUuid(), libro.getUuid());
 
         if (!prestitoOptional.isPresent()) {
             throw new IllegalArgumentException("Prestito non trovato per l'utente e il libro forniti.");
@@ -66,8 +56,9 @@ public class PrestitoService {
         Prestito prestito = prestitoOptional.get();
         libro.setQuantitaDisponibile(libro.getQuantitaDisponibile() + 1);
         libro.restituisciLibro();
+        libro.setTotPrestiti(libro.getTotPrestiti()+1);
         prestito.setDataRestituzione(LocalDate.now());
-        calculateDelay(prestito);
+        prestito.calculateDelay();
         prestitoRepository.save(prestito);
         libroRepository.save(libro);
         utente.setTotPrestitiUtente(utente.getTotPrestitiUtente() - 1);
@@ -142,6 +133,7 @@ public class PrestitoService {
             // Aggiornare il totale dei prestiti dell'utente
             utente.setTotPrestitiUtente(utente.getTotPrestitiUtente() + 1);
             utenteRepository.save(utente);
+            System.out.println(("tot prestiti utente: " +  utente.getTotPrestitiUtente()));
 
             log.info("Prestito salvato nel database.");
         } else {

@@ -59,4 +59,13 @@ public class Prestito {
         }
         this.prestitoEndDate = this.prestitoStartDate.plus(15, ChronoUnit.DAYS);
     }
+
+    public void calculateDelay() {
+        long delay;
+        if (this.getPrestitoEndDate().isBefore(this.getDataRestituzione())) {
+            delay = java.time.temporal.ChronoUnit.DAYS.between(this.getPrestitoEndDate(), this.getDataRestituzione());
+        } else {
+            delay = 0;
+        }
+    }
 }

@@ -28,6 +28,6 @@ public class PrestitoController {
     @PutMapping("/")
     public ResponseEntity<Void> restituireLibro(@RequestParam String codiceUtente, @RequestParam String codiceLibro) {
         prestitoService.restituireLibro(codiceUtente, codiceLibro);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().build();
     }
 }

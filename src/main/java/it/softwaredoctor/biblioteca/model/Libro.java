@@ -92,10 +92,7 @@ public class Libro {
         }
     }
 
-
     public void restituisciLibro() {
-        if (isPrestato) {
-            this.isPrestato = false;
-        }
+            this.isPrestato = Boolean.TRUE;
     }
 }

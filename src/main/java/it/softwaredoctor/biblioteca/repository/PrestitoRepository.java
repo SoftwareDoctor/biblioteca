@@ -8,11 +8,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Repository
 public interface PrestitoRepository extends JpaRepository<Prestito, Long> {
 
-    Optional<Prestito> findPrestitoByUtenteAndLibro(Utente utente, Libro libro);
+//    Optional<Prestito> findPrestitoByUtenteAndLibro(Utente utente, Libro libro);
+
+    Optional<Prestito> findPrestitoByUtenteUuidAndLibroUuid(UUID uuidUtente, UUID uuidLibro);
 
     List<Prestito> findAllByBiblioteca(Biblioteca biblioteca);
 
