@@ -36,8 +36,11 @@ public class PrestitoService {
                 .collect(Collectors.toList());
     }
 
-    public void restituireLibro(String codUtente, String codLibro) {
-        Optional<Utente> utenteOptional = utenteRepository.findByCodUtente(codUtente);
+    public void restituireLibro(String codUtente, String codLibro, UUID uuid) {
+        Optional<Biblioteca> bibliotecaOptional = bibliotecaRepository.findByUuid(uuid);
+        Biblioteca biblioteca = bibliotecaOptional.get();
+
+        Optional<Utente> utenteOptional = utenteRepository.findByCodUtenteAndBibliotecaId(codUtente,biblioteca.getId());
         if (!utenteOptional.isPresent()) {
             throw new IllegalArgumentException("Utente non trovato per il codice fornito.");
         }
