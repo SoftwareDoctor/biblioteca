@@ -11,6 +11,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.UUID;
 import static java.time.LocalDate.now;
 
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -57,7 +58,8 @@ public class Prestito {
         if (this.uuid == null) {
             this.uuid = UUID.randomUUID();
         }
-        this.prestitoEndDate = this.prestitoStartDate.plus(15, ChronoUnit.DAYS);
+//        this.prestitoEndDate = this.prestitoStartDate.plus(15, ChronoUnit.DAYS);
+        this.prestitoEndDate = this.prestitoStartDate.plusDays(15);
     }
 
     public void calculateDelay() {
